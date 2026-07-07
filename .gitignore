@@ -1,0 +1,16 @@
+# Signing material — NEVER commit keystores or keys
+*.keystore
+*.jks
+*.p8
+*.p12
+*.key
+*.pem
+
+# Env files — never commit any .env except the example template
+.env
+.env*
+!.env.example
+
+# Build artifacts
+*.apk
+*.aab
