@@ -14,3 +14,6 @@
 # Build artifacts
 *.apk
 *.aab
+
+# Nested app repo — its own git repo, not part of the landing site
+UpModeApp/
