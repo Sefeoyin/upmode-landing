@@ -610,7 +610,7 @@ section{padding:120px 48px}
 /* ── PRICING ── */
 .pricing-section{background:#111}
 .pricing-cards{
-  display:grid;grid-template-columns:repeat(4,1fr);
+  display:flex;align-items:stretch;justify-content:center;
   gap:12px;margin-top:64px;
 }
 .pc{
@@ -619,6 +619,8 @@ section{padding:120px 48px}
   border-radius:12px;padding:32px;
   position:relative;overflow:hidden;
   transition:border-color 0.3s,transform 0.25s;
+  /* Equal widths and full-height stretch, so every CTA lands on one line. */
+  display:flex;flex-direction:column;flex:1 1 0;min-width:0;
 }
 .pc:hover{transform:translateY(-4px)}
 .pc.best{border-color:var(--orange);background:linear-gradient(160deg,rgba(232,93,4,0.1),var(--card))}
@@ -641,6 +643,9 @@ section{padding:120px 48px}
 }
 .pc-price sup{font-size:20px;vertical-align:super;font-weight:700;color:rgba(245,241,235,0.5)}
 .pc-period{font-size:12px;font-weight:300;color:rgba(245,241,235,0.3);margin-top:4px;margin-bottom:28px}
+/* Trial sub-label sits tight under the period, so collapse the gap above it. */
+.pc-period:has(+ .pc-sub){margin-bottom:6px}
+.pc-sub{font-size:12px;font-weight:500;color:var(--orange);margin-bottom:28px}
 .pc-div{height:1px;background:rgba(255,255,255,0.06);margin-bottom:24px}
 .pc-list{list-style:none;margin-bottom:32px}
 .pc-list li{
@@ -662,6 +667,8 @@ section{padding:120px 48px}
 .pc-btn{
   display:block;width:100%;padding:13px;text-align:center;
   border-radius:6px;
+  /* Pins the CTA to the card floor regardless of how many features are listed. */
+  margin-top:auto;
   font-family:var(--font-cond);font-size:13px;font-weight:800;
   letter-spacing:1.5px;text-transform:uppercase;
   text-decoration:none;cursor:none;transition:all 0.2s;
@@ -843,7 +850,11 @@ footer{
   .hero-actions{align-items:flex-start}
   .bento{grid-template-columns:1fr 1fr}
   .col-8,.col-7,.col-5,.col-4,.col-4b,.col-6{grid-column:span 2}
-  .uc-content.active,.missions-layout,.pricing-cards{grid-template-columns:1fr}
+  .uc-content.active,.missions-layout{grid-template-columns:1fr}
+  /* Stacked, the main axis flips to vertical — flex-basis:0 would collapse each
+     card to nothing, so hand height back to the content. */
+  .pricing-cards{flex-direction:column}
+  .pricing-cards .pc{flex:0 0 auto}
   .stats-grid{grid-template-columns:1fr 1fr}
   .testimonials-grid{grid-template-columns:1fr}
   .footer-grid{grid-template-columns:1fr 1fr}
